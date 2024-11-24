@@ -8,6 +8,7 @@ import dog from "./assets/dog.mp3";
 import elephant from "./assets/elephant.mp3";
 import horse from "./assets/horse.mp3";
 import upload from "./assets/upload.png";
+import { utterances } from "./dummy";
 const SKIN_COLORS = [
   "Tanned",
   "Yellow",
@@ -151,6 +152,7 @@ export const App = () => {
   const [inputAudio, setInputAudio] = useState();
   const [transcript, setTranscript] = useState();
   const [conversation, setConversation] = useState(0);
+  const [summary, setSummary] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const toggleRaw = () => {
@@ -158,7 +160,6 @@ export const App = () => {
     setError(null);
     setRaw((prevRaw) => !prevRaw);
   };
-
   const handlePost = async () => {
     if (inputAudio) {
       const audioArrayBuffer = await inputAudio.arrayBuffer();
@@ -211,6 +212,7 @@ export const App = () => {
         }
         setConversation(speakers);
         setTranscript(response.data);
+        setSummary(response.data.summary);
         setLoading(false);
       } catch (error) {
         setError("Error uploading audio:");
@@ -223,7 +225,11 @@ export const App = () => {
 
   if (transcript)
     return (
-      <Playground speakers={conversation} utterances={transcript.utterances} />
+      <Playground
+        speakers={conversation}
+        utterances={utterances}
+        summary={summary}
+      />
     );
   return (
     <div className="flex flex-col items-center justify-center bg-white h-[80%] gap-8 w-[80%]">

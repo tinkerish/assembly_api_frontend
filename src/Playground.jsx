@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import AvatarComponent from "./Avatar";
 
-const Playground = ({ speakers, utterances }) => {
+const Playground = ({ speakers, utterances, summary }) => {
   const [displayedUtterance, setDisplayedUtterance] = useState(null);
   const isOdd = useMemo(() => {
     return Object.keys(speakers).length % 2 !== 0;
@@ -10,7 +10,6 @@ const Playground = ({ speakers, utterances }) => {
     return Math.floor(Object.keys(speakers).length / 2);
   }, [speakers]);
   let intervalId = null;
-  console.log(middleIndex);
 
   useEffect(() => {
     if (!utterances.length) return;
@@ -38,13 +37,12 @@ const Playground = ({ speakers, utterances }) => {
     if (index >= utterances.length) return 0;
     if (index === null) return 500;
     const duration = utterances[index].text.split(" ").length;
-    console.log(duration);
-
     return Math.max(2000, duration * 500);
   };
 
   return (
-    <div className="w-[80%]">
+    <div className="w-[80%] bg-white shadow-custom">
+      <h1 className="text-xl font-bold pt-4 text-center">{summary}</h1>
       <div
         className={`playground-grid ${
           isOdd ? "odd-speakers" : "even-speakers"
