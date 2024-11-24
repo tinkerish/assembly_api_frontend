@@ -226,7 +226,7 @@ export const App = () => {
       <Playground speakers={conversation} utterances={transcript.utterances} />
     );
   return (
-    <div className="flex flex-col items-center justify-center bg-white h-[80vh] gap-8">
+    <div className="flex flex-col items-center justify-center bg-white h-[80%] gap-8 w-[80%]">
       <h1 className="text-xl font-bold pt-4 text-center">
         Visualize your conversation in the most fun way
       </h1>

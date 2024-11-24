@@ -44,7 +44,7 @@ const Playground = ({ speakers, utterances }) => {
   };
 
   return (
-    <div className="m-auto5">
+    <div className="w-[80%]">
       <div
         className={`playground-grid ${
           isOdd ? "odd-speakers" : "even-speakers"

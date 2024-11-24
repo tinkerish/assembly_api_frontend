@@ -1,6 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
 .playground-grid {
   display: grid;
   gap: 10px;
@@ -23,16 +30,15 @@
   justify-self: end;
   display: flex;
 }
-.speaker-item p{
+.speaker-item p {
   right: 85%;
 }
 .middle-speaker {
   justify-self: center;
   grid-column-start: 1;
   grid-column-end: 4;
-
 }
-.middle-speaker p{
+.middle-speaker p {
   left: 50%;
   bottom: 100%;
 }
@@ -40,9 +46,8 @@
   justify-self: start;
   grid-column-start: 1;
   grid-column-end: 3;
-  
 }
-.left-speaker p{
+.left-speaker p {
   left: 85%;
 }
 body {
@@ -71,10 +76,9 @@ body {
   border: 5px solid;
   border-color: #fff transparent transparent #fff;
 }
-.left-speaker .talkbubble:before{
+.left-speaker .talkbubble:before {
   left: 2%;
 }
-.left-speaker .talkbubble:after{
+.left-speaker .talkbubble:after {
   left: 4%;
-
 }
