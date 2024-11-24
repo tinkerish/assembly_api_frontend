@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import "./App.css";
 import Avatar from "avataaars";
 const MOUTH_TYPES = ["Twinkle", "Smile", "Serious"];
 const randomIndex = (length) => {
