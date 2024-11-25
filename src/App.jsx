@@ -210,12 +210,19 @@ export const App = () => {
           setLoading(false);
           return;
         }
+        if (response.status === 500) {
+          setError(
+            response.error && response.details
+              ? `${response.error}: ${response.details}`
+              : "Error uploading audio"
+          );
+        }
         setConversation(speakers);
         setTranscript(response.data);
         setSummary(response.data.summary);
         setLoading(false);
       } catch (error) {
-        setError("Error uploading audio:");
+        setError("Error uploading audio");
         setLoading(false);
       }
     } else {
@@ -232,7 +239,7 @@ export const App = () => {
       />
     );
   return (
-    <div className="flex flex-col items-center justify-center bg-white h-[80%] gap-8 w-[80%]">
+    <div className="flex flex-col items-center justify-center bg-white h-[80%] gap-8 w-[80%] py-4">
       <h1 className="text-xl font-bold pt-4 text-center">
         Visualize your conversation in the most fun way
       </h1>
@@ -271,6 +278,28 @@ export const App = () => {
               </div>
             )}
           </div>
+          <div className=" w-[80%]">
+            <ol className="list-disc text-gray-500">
+              <li>
+                {" "}
+                Use multi-speaker audio. Speakers shouldn't be more than 5 .
+              </li>
+              <li>
+                The accuracy of the Speaker Diarization model depends on several
+                factors, including the quality of the audio, the number of
+                speakers, and the length of the audio file. Ensuring that each
+                speaker speaks for at least 30 seconds uninterrupted and
+                avoiding scenarios where a person only speaks a few short
+                phrases can improve accuracy. However, it's important to note
+                that the model isn't perfect and may make mistakes, especially
+                in more challenging scenarios.
+              </li>
+              <li>Audio Limit: 30MB</li>
+            </ol>
+          </div>
+          {error && (
+            <p className="text-red-700 text-lg pb-4 text-center">{error}</p>
+          )}
           <div className="flex items-center justify-end gap-2 w-[80%]">
             <button
               onClick={handlePost}
@@ -282,10 +311,6 @@ export const App = () => {
               {raw ? "Switch to File Upload" : "Switch to Record Audio"}
             </button>
           </div>
-          <p className="text-red-700 text-xl pb-4 text-center">
-            Note: Use multi-speaker audio. Speakers shouldn't be more than 5 .
-          </p>
-          {error && <p>{error}</p>}
         </div>
       )}
     </div>
